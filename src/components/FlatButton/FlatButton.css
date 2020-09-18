@@ -1,0 +1,16 @@
+.flatButton {
+    font-weight: 400;
+    color: #16A085;
+    font-size: 0.95rem;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: auto;
+    transition: all .25s;
+    outline: none;
+}
+
+.flatButton:disabled {
+    color: #7F8C8D;
+}

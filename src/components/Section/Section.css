@@ -1,0 +1,9 @@
+.section {
+    margin: 16px 0;
+}
+
+.title {
+    font-size: 0.8rem;
+    color: #7F8C8D;
+    padding: 8px 16px;
+}

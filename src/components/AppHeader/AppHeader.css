@@ -1,0 +1,32 @@
+.appHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    background-color: #34495E;
+    color: #ECF0F1;
+    padding: 0 16px;
+    position: sticky;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.title {
+    font-weight: 700;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.buttonContainer {
+    width: 30%;
+}
+
+.buttonContainer:first-child {
+    text-align: left;
+}
+
+.buttonContainer:last-child {
+    text-align: right;
+}

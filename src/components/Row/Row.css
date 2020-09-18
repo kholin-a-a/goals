@@ -1,0 +1,9 @@
+.row {
+    background-color: #34495E;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.row:last-child {
+    border-bottom: none;
+}

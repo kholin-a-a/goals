@@ -1,0 +1,27 @@
+.modalOptionButtonComponent {
+    background-color: #34495E;
+    color: #ECF0F1;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.modalOptionButtonComponent:first-child {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.modalOptionButtonComponent:last-child {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-bottom: none;
+}
+
+.center {
+    justify-content: center;
+}
+
+.icon {
+    width: 40px;
+}

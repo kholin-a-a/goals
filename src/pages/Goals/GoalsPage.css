@@ -1,0 +1,96 @@
+.goal {
+    background-color: #34495E;
+    color: #ECF0F1;
+    user-select: none;
+    -webkit-user-select: none;
+    margin-top: 8px;
+}
+
+.goal > .title {
+    padding: 16px;
+    text-align: justify;
+    font-weight: 600;
+}
+
+.goalKey {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 16px;
+    border-top: 1px solid rgba(255, 255, 255, .15);
+}
+
+.goalKey .title {
+    padding-right: 12px;
+}
+
+.dateUpdated {
+    font-size: 0.8rem;
+    color: #BDC3C7;
+    margin-top: 8px;
+}
+
+.results {
+    color: #16A085;
+}
+
+.percentage {
+    color: #BDC3C7;
+    font-size: 0.8rem;
+    margin-top: 8px;
+    text-align: right;
+}
+
+.completed {
+    opacity: 0.6;
+}
+
+.goalKeySelector {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 3000;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .3);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.goalKeySelectorContent {
+    background-color: #2C3E50;
+    animation: slideUp .25s;
+}
+
+.goalKeySelectorButtonsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.goalKeySelectorButtonsContainer .btnContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+
+    border-right: 1px solid rgba(255, 255, 255, .15);
+}
+
+.goalKeySelectorButtonsContainer .btnContainer:last-child {
+    border-right: none;
+}
+
+.goalKeySelectorButtonsContainer button {
+    width: 100%;
+}
+
+@keyframes slideUp {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
