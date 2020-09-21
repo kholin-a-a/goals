@@ -11,6 +11,7 @@ import { SafeArea } from "components/SafeArea";
 
 import { useHistory } from "react-router-dom";
 import { classNames, dateToRecency } from "converters";
+import { sortGoalsByDate } from "./converters/sortGoals";
 
 import * as goalStorage from "storages/GoalsStorage";
 import * as Arr from "helpers/Array";
@@ -63,10 +64,10 @@ export function GoalsPage() {
 }
 
 function useGoals() {
-    const [goals, setGoals] = useState(goalStorage.read());
+    const [goals, setGoals] = useState(sortGoalsByDate(goalStorage.read()));
 
     useEffect(() => {
-        const onGoalsChanged = goals => setGoals(goals);
+        const onGoalsChanged = goals => setGoals(sortGoalsByDate(goals));
 
         goalStorage.subscribe(onGoalsChanged);
 
