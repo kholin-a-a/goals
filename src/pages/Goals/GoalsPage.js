@@ -15,6 +15,8 @@ import { sortGoalsByDate } from "./converters/sortGoals";
 import { nonArchivedGoals } from "./converters/filterGoals";
 
 import * as goalStorage from "storages/GoalsStorage";
+import * as historyStorage from "storages/ProgressHistoryStorage";
+
 import * as Arr from "helpers/Array";
 
 export function GoalsPage() {
@@ -128,7 +130,12 @@ function useSelectedKey() {
     const unselect = () => setKey(null);
 
     const onSelect = (value) => {
-        goalStorage.setGoalKeyCurrent(key.id, value);
+        const current = key.current;
+        const newCurrent = value;
+
+        goalStorage.setGoalKeyCurrent(key.id, newCurrent);
+        historyStorage.add(key.id, newCurrent - current);
+        
         unselect();
     }
 
