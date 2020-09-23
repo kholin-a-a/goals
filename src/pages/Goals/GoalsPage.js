@@ -1,5 +1,5 @@
 import styles from "./GoalsPage.css";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { AppHeader } from "components/AppHeader";
 import { Repeat } from "components/Repeat";
 import { ModalOptionComponent, ModalOptionButtonComponent } from "components/ModalOption";
@@ -12,6 +12,7 @@ import { SafeArea } from "components/SafeArea";
 import { useHistory } from "react-router-dom";
 import { classNames, dateToRecency } from "converters";
 import { sortGoalsByDate } from "./converters/sortGoals";
+import { nonArchivedGoals } from "./converters/filterGoals";
 
 import * as goalStorage from "storages/GoalsStorage";
 import * as Arr from "helpers/Array";
@@ -51,7 +52,7 @@ export function GoalsPage() {
                 onClose={selectedGoal.unselect}
                 onEditClick={selectedGoal.onEdit}
                 onResetClick={selectedGoal.onReset}
-                onRemoveClick={selectedGoal.onRemove}
+                onArchiveClick={selectedGoal.onArchiveClick}
             />
 
             <GoalKeyValueSelector
@@ -64,10 +65,18 @@ export function GoalsPage() {
 }
 
 function useGoals() {
-    const [goals, setGoals] = useState(sortGoalsByDate(goalStorage.read()));
+    const filterAndSort = goals =>
+        sortGoalsByDate(
+            nonArchivedGoals(
+                goals
+            )
+        );
+
+    const initial = useMemo(() => filterAndSort(goalStorage.read()), []);
+    const [goals, setGoals] = useState(initial);
 
     useEffect(() => {
-        const onGoalsChanged = goals => setGoals(sortGoalsByDate(goals));
+        const onGoalsChanged = goals => setGoals(filterAndSort(goals));
 
         goalStorage.subscribe(onGoalsChanged);
 
@@ -86,8 +95,8 @@ function useSelectedGoal() {
     const select = goal => setGoal(goal);
     const unselect = () => setGoal(null);
 
-    const onRemove = () => {
-        goalStorage.remove(goal);
+    const onArchiveClick = () => {
+        goalStorage.archive(goal);
         unselect();
     }
 
@@ -106,7 +115,7 @@ function useSelectedGoal() {
 
         select,
         unselect,
-        onRemove,
+        onArchiveClick,
         onReset,
         onEdit
     }
@@ -186,7 +195,7 @@ const GoalKey = ({ goalKey, onClick }) => {
     )
 }
 
-const GoalOptions = ({ isOpen, onClose, onEditClick, onRemoveClick, onResetClick }) => {
+const GoalOptions = ({ isOpen, onClose, onEditClick, onArchiveClick, onResetClick }) => {
     return (
         <ModalOptionComponent
             isOpen={isOpen}
@@ -194,7 +203,7 @@ const GoalOptions = ({ isOpen, onClose, onEditClick, onRemoveClick, onResetClick
         >
             <ModalOptionButtonComponent title="Перезапустить" onClick={onResetClick} />
             <ModalOptionButtonComponent title="Редактировать" onClick={onEditClick} />
-            <ModalOptionButtonComponent title="Удалить" onClick={onRemoveClick} />
+            <ModalOptionButtonComponent title="Архивировать" onClick={onArchiveClick} />
         </ModalOptionComponent>
     )
 }

@@ -70,10 +70,13 @@ export function update(goal) {
     notify();
 }
 
-export function remove(goal) {
+export function archive(goal) {
     let goals = read();
 
-    goals = goals.filter(g => g.id !== goal.id);
+    goals = goals.map(g => ({
+        ...g,
+        archived: g.id === goal.id ? true : !!g.archived
+    }));
 
     save(goals);
     notify();
