@@ -67,12 +67,7 @@ export function GoalsPage() {
 }
 
 function useGoals() {
-    const filterAndSort = goals =>
-        sortGoalsByDate(
-            nonArchivedGoals(
-                goals
-            )
-        );
+    const filterAndSort = goals => nonArchivedGoals(goals);
 
     const initial = useMemo(() => filterAndSort(goalStorage.read()), []);
     const [goals, setGoals] = useState(initial);
@@ -135,7 +130,7 @@ function useSelectedKey() {
 
         goalStorage.setGoalKeyCurrent(key.id, newCurrent);
         historyStorage.add(key.id, newCurrent - current);
-        
+
         unselect();
     }
 
